@@ -1,0 +1,19 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require '../../common/common.rb'
+externs = Common::Externs.new 'win7-32'
+
+Vagrant.configure("2") do |config|
+  config.vm.guest = :windows
+  config.vm.box = "win7-32"
+  config.vm.box_url = (externs.local_box_path "win7-32.box")
+
+  config.windows.halt_timeout = 25
+  config.winrm.username = "vagrant"
+  config.winrm.password = "vagrant"
+
+  config.vm.network :forwarded_port, guest: 3389, host: 3389
+  config.vm.network :forwarded_port, guest: 5985, host: 5985
+  externs.add_common_configs config
+end

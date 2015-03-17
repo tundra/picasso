@@ -1,0 +1,5 @@
+jenkins/home/keys
+jenkins/home/logs
+jenkins/*.log
+jenkins/home/plugins
+.vagrant

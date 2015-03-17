@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<user>
+  <fullName>jenkins</fullName>
+  <description></description>
+  <properties>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <jenkins.security.LastGrantedAuthoritiesProperty>
+      <roles>
+        <string>jenkins</string>
+        <string>authenticated</string>
+      </roles>
+      <timestamp>1426516038111</timestamp>
+    </jenkins.security.LastGrantedAuthoritiesProperty>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>gFVUA7uGbcCfL2GrjMadT0s1y0MjuRAW6BHyY5IxmZGIi0baSoQOyvGLRFHJZ/J4</apiToken>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.18">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain>
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList/>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.11">
+      <emailAddress></emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName></primaryViewName>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+      <authorizedKeys>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqbIVeLN69I/G7AU18ERvHahM9QeN41pARgzPTQnhgP0VLMdNF8eN1ktqme0E4DRRy3OlePoLAPHrt5qls58sYPF3hPgOPQngNPt86ChnOL7XNhNqCNcLVlB3WLxfis8EKvMv9R+QsVVm/qrNIw7G/16Q919ppunQzWfJlaHlFJAOPcZDv4250FEIEXNAUdQIlgg5z/h5ONUU+GqUHkWElAVO3gRVVCGdsnyLkjtW3jxqvEio8JINeo/nPGxSnVYBKw3H/5fPvlGjqSx8ocDSE71EPJ+xFGrarfO+HqU8QfdmVdI41ndQdQ4hkEYRvbIUZ8O0c0CH0aksZ0dw4yM0V tundra jenkins</authorizedKeys>
+    </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+  </properties>
+</user>
