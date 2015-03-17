@@ -27,12 +27,12 @@ passwd jenkins
 iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to 8080
 
 # Check out the jenkins project under the jenkins user.
-if [ ! -f /home/jenkins ]; then
+if [ ! -d /home/jenkins ]; then
   mkdir -p /home/jenkins
   chown jenkins /home/jenkins
   cd /home/jenkins
-  su jenkins -c "git clone https://github.com/tundra/jenkins.git"
-  su jenkins -c "mkdir -p jenkins/home/keys"
+  su jenkins -c "git clone https://github.com/tundra/picasso.git"
+  su jenkins -c "mkdir -p picasso/jenkins/home/keys"
 fi
 
 # Get rid of the generated jenkins home, remap it to the github project. We have
@@ -40,5 +40,5 @@ fi
 # symlinks.
 if [ -d /var/lib/jenkins -a ! -h /var/lib/jenkins ]; then
   rmdir /var/lib/jenkins
-  ln -s /home/jenkins/jenkins/home /var/lib/jenkins
+  ln -s /home/jenkins/picasso/jenkins/home /var/lib/jenkins
 fi

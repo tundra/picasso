@@ -71,11 +71,12 @@ fi
 # Prime the master, creating user jenkins etc.
 $BASE/run-script-remote.sh $REMOTE_FLAGS --user root --script $BASE/helpers/root-prime-master.sh
 
-# Add the public key to the jenkins user.
+# Add the public key to the jenkins user. Ideally this would be done by
+# ssh-copy-id but we need root to do it, not jenkins itself.
 cat $ACCESS_PUB | $BASE/run-script-remote.sh $REMOTE_FLAGS --user root --script $BASE/helpers/root-install-key.sh
 
 # Copy the jenkins identity to the machine such that it can "be" jenkins.
-scp -P$PORT $JENKINS_PRI jenkins@$HOST:/home/jenkins/jenkins/home/keys/id_rsa.jenkins
+scp -P$PORT $JENKINS_PRI jenkins@$HOST:/home/jenkins/picasso/jenkins/home/keys/id_rsa.jenkins
 
 # Finally, start jenkins running.
 $BASE/run-script-remote.sh $REMOTE_FLAGS --user root --script $BASE/helpers/root-start-jenkins.sh
