@@ -5,6 +5,7 @@ set -e
 BASE=$(dirname $0)
 SLAVE_ID=
 JENKINS_PRI=
+SECRET=
 
 while getopts ":-:" OPTCHAR; do
   case "$OPTCHAR" in
@@ -16,6 +17,10 @@ while getopts ":-:" OPTCHAR; do
           ;;
         jenkins-private-key)
           JENKINS_PRI="${!OPTIND}"
+          OPTIND=$(($OPTIND + 1))
+          ;;
+        secret)
+          SECRET="${!OPTIND}"
           OPTIND=$(($OPTIND + 1))
           ;;
         *)
@@ -36,19 +41,22 @@ if [ -z "$SLAVE_ID" ]; then
   exit 1
 fi
 
-SECRET_CRYPT="$BASE/../slave/$SLAVE_ID.secret.crypt"
-if [ ! -f $SECRET_CRYPT ]; then
-  echo "Couldn't find slave secret $SECRET_CRYPT"
-  exit 1
-fi
+if [ ! -z "$JENKINS_PRI" ]; then
+  if [ ! -f "$JENKINS_PRI" ]; then
+    echo "Private key $JENKINS_PRI doesn't exist"
+    exit 1
+  fi
 
-if [ -z "$JENKINS_PRI" ]; then
-  echo "No --jenkins-private-key specified"
-  exit 1
-fi
+  SECRET_CRYPT="$BASE/../slave/$SLAVE_ID.secret.crypt"
+  if [ ! -f $SECRET_CRYPT ]; then
+    echo "Couldn't find slave secret $SECRET_CRYPT"
+    exit 1
+  fi
 
-if [ ! -f "$JENKINS_PRI" ]; then
-  echo "Private key $JENKINS_PRI doesn't exist"
+  # If a jenkins key is given we extract the secret from the slave files.
+  SECRET=$(cat $SECRET_CRYPT | base64 -d | openssl rsautl -decrypt -inkey $JENKINS_PRI)
+elif [ -z "$SECRET" ]; then
+  echo "No --jenkins-private-key or --secret specified"
   exit 1
 fi
 
@@ -60,4 +68,4 @@ fi
 java                                                                           \
   -jar slave.jar                                                               \
   -jnlpUrl http://ci.t.undra.org/computer/$SLAVE_ID/slave-agent.jnlp           \
-  -secret $(cat $SECRET_CRYPT | base64 -d | openssl rsautl -decrypt -inkey $JENKINS_PRI)
+  -secret $SECRET
