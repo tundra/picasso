@@ -12,12 +12,10 @@ fi
 #   openssl rsa -in keys/id_rsa.jenkins -pubout > id_rsa.pub.pem
 #   cat $SECRET | openssl rsautl -encrypt -pubin -inkey id_rsa.pub.pem | base64 > $SECRET.crypt
 SECRETS="""
-secret.key
 secrets/jenkins.slaves.JnlpSlaveAgentProtocol.secret
+secrets/master.key
 """
 
-# Decrypt the jenkins secret key. We want the same one every time since the
-# executor secrets depend on it.
 cd ~jenkins
 for SECRET in $SECRETS; do
   su jenkins -c "cat $SECRET.crypt | base64 -d | openssl rsautl -decrypt -inkey keys/id_rsa.jenkins > $SECRET"

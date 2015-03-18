@@ -1,0 +1,10 @@
+These are the slave keys encrypted using the jenkins key.
+
+To decrypt a key do
+
+  cat <slave>.secret.crypt | base64 -d | openssl rsautl -decrypt -inkey <jenkins private key>
+
+To encrypt a new slave key do
+
+  openssl rsa -in <jenkins private key> -pubout > id_rsa.pub.pem
+  echo <literal secret> | openssl rsautl -encrypt -pubin -inkey id_rsa.pub.pem | base64 > <slave>.secret.crypt
