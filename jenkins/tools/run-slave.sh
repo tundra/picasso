@@ -1,16 +1,36 @@
 #!/bin/bash
 
+# Starts a jenkins build slave. To run, the slave must have an id and a secret
+# that matches that id. You can either pass the jenkins private key and the
+# secret will be extracted automatically, or alternatively pass a secret
+# explicitly. You can also run remotely by passing a host/port/user and the
+# secret will be extracted here (on this machine) and passed to the target
+# machine where it'll be used to run the slave.
+
 set -e
 
 BASE=$(dirname $0)
 SLAVE_ID=
 JENKINS_PRI=
 SECRET=
+REMOTE_FLAGS=
 
 while getopts ":-:" OPTCHAR; do
   case "$OPTCHAR" in
     -)
       case "$OPTARG" in
+        host)
+          REMOTE_FLAGS="$REMOTE_FLAGS --host ${!OPTIND}"
+          OPTIND=$(($OPTIND + 1))
+          ;;
+        port)
+          REMOTE_FLAGS="$REMOTE_FLAGS --port ${!OPTIND}"
+          OPTIND=$(($OPTIND + 1))
+          ;;
+        user)
+          REMOTE_FLAGS="$REMOTE_FLAGS --user ${!OPTIND}"
+          OPTIND=$(($OPTIND + 1))
+          ;;
         id)
           SLAVE_ID="${!OPTIND}"
           OPTIND=$(($OPTIND + 1))
@@ -60,12 +80,20 @@ elif [ -z "$SECRET" ]; then
   exit 1
 fi
 
-# Fetch the slave jar if it's not here already.
-if [ ! -f slave.jar ]; then
-  wget http://ci.t.undra.org/jnlpJars/slave.jar
-fi
+if [ ! -z "$REMOTE_FLAGS" ]; then
+  $BASE/run-script-remote.sh $REMOTE_FLAGS --script $BASE/run-slave.sh --flags "--id $SLAVE_ID --secret $SECRET"
 
-java                                                                           \
-  -jar slave.jar                                                               \
-  -jnlpUrl http://ci.t.undra.org/computer/$SLAVE_ID/slave-agent.jnlp           \
-  -secret $SECRET
+else
+  # There are no remote flags so we run locally.
+
+  # Fetch the slave jar if it's not here already.
+  if [ ! -f slave.jar ]; then
+    wget http://ci.t.undra.org/jnlpJars/slave.jar
+  fi
+
+  # Start the slave agent.
+  java                                                                           \
+    -jar slave.jar                                                               \
+    -jnlpUrl http://ci.t.undra.org/computer/$SLAVE_ID/slave-agent.jnlp           \
+    -secret $SECRET
+fi

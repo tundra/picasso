@@ -7,6 +7,7 @@ set -e
 HOST=
 PORT=22
 SCRIPT=
+FLAGS=
 USER_PREFIX=
 
 while getopts ":-:" OPTCHAR; do
@@ -27,6 +28,10 @@ while getopts ":-:" OPTCHAR; do
           ;;
         script)
           SCRIPT="${!OPTIND}"
+          OPTIND=$(($OPTIND + 1))
+          ;;
+        flags)
+          FLAGS="${!OPTIND}"
           OPTIND=$(($OPTIND + 1))
           ;;
         *)
@@ -64,4 +69,4 @@ set -v
 # so look into that only if it does become a problem.
 TMPFILE=/tmp/remote-script-$RANDOM.sh
 scp -P$PORT $SCRIPT $USER_PREFIX$HOST:$TMPFILE
-ssh -p$PORT $USER_PREFIX$HOST "bash $TMPFILE"
+ssh -p$PORT $USER_PREFIX$HOST "bash $TMPFILE $FLAGS"
