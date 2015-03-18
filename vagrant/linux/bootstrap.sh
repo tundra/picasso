@@ -9,6 +9,7 @@ make
 python-setuptools
 python-pip
 g++
+default-jre
 """
 
 # Apt-get dependencies.
