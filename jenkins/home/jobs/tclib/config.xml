@@ -64,7 +64,8 @@
     <hudson.matrix.LabelAxis>
       <name>label</name>
       <values>
-        <string>precise32</string>
+        <string>linux32</string>
+        <string>linux64</string>
       </values>
     </hudson.matrix.LabelAxis>
   </axes>
