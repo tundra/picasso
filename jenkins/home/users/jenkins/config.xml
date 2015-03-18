@@ -42,7 +42,7 @@
       </views>
     </hudson.model.MyViewsProperty>
     <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
-      <authorizedKeys>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqbIVeLN69I/G7AU18ERvHahM9QeN41pARgzPTQnhgP0VLMdNF8eN1ktqme0E4DRRy3OlePoLAPHrt5qls58sYPF3hPgOPQngNPt86ChnOL7XNhNqCNcLVlB3WLxfis8EKvMv9R+QsVVm/qrNIw7G/16Q919ppunQzWfJlaHlFJAOPcZDv4250FEIEXNAUdQIlgg5z/h5ONUU+GqUHkWElAVO3gRVVCGdsnyLkjtW3jxqvEio8JINeo/nPGxSnVYBKw3H/5fPvlGjqSx8ocDSE71EPJ+xFGrarfO+HqU8QfdmVdI41ndQdQ4hkEYRvbIUZ8O0c0CH0aksZ0dw4yM0V tundra jenkins</authorizedKeys>
+      <authorizedKeys>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCwMH6uPm5iI+MIJLTmoTghCwQZuOO2F/bkQeV+SiBj4zhWoEh/F0rpUTD3Dl2DWGJlcrdVh+rCYosTtnlWvca7GJb6kebiB+tabUD5gYoYvi1hfPQIB/wNaJcm1PgNxlGhloQJpLiWcOPu5f6v35rxkNrLlhdeG8gKhaGLSi4ejai6UjNEIdu5ZP4ihP+h/aDuTjbfRIbB9gaqurcF/qHdb5mlq2ehw0L3wnNti7JRJgxMGezrSWuwwZQ14chFECLiMyr1Kk0HY/OI2zJqjNuUGBmZiWikPyXFMzsPjJELsSMOVdINY4MN1pvnuAJHocajrIEPF/mLeKvTJxr7ZWpa/CZETDBQ4jjLJoBaIDt7kd+j+WZzdAETyJE7h8Ir7BNG4+mThv7aXgMuMFKYAhIQsOLSWbSZUFQrkaNWm6dzjcUGAko432EguXXWG6tdttdoRkyZcAhZfZtkazoLflAmIRMPO6nm1A4OMcxcGDp8BOCt85NJZB3U6GQ10+fIKqMJg2axKQRK3YoT6LyDhgttQxOwAehPednpy8TvO3oub1t0N8DOO7mqUco0u6Mg9sdPCtDaoMAQYLyjVAA1vsfKb1iIAPgZQoS6IV9bOiOK/knWuWabg5TyO2xlQr11HzqnTJZ78AQNvobFVqwKBruy+4NwHpZdMYc/t6uYkGIFPQ== tundra jenkins</authorizedKeys>
     </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
     <hudson.search.UserSearchProperty>
       <insensitiveSearch>false</insensitiveSearch>
