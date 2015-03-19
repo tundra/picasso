@@ -44,7 +44,7 @@
       <cron>H/5 * * * *</cron>
       <triggerPhrase></triggerPhrase>
       <onlyTriggerPhrase>false</onlyTriggerPhrase>
-      <useGitHubHooks>false</useGitHubHooks>
+      <useGitHubHooks>true</useGitHubHooks>
       <permitAll>false</permitAll>
       <commentFilePath></commentFilePath>
       <whitelist></whitelist>
