@@ -43,6 +43,18 @@
       <nodeProperties/>
       <userId>jenkins</userId>
     </slave>
+    <slave>
+      <name>win7-32</name>
+      <description></description>
+      <remoteFS>C:\jenkins</remoteFS>
+      <numExecutors>1</numExecutors>
+      <mode>EXCLUSIVE</mode>
+      <retentionStrategy class="hudson.slaves.RetentionStrategy$Always"/>
+      <launcher class="hudson.slaves.JNLPLauncher"/>
+      <label>windows 32bit</label>
+      <nodeProperties/>
+      <userId>jenkins</userId>
+    </slave>
   </slaves>
   <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
