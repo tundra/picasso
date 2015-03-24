@@ -30,9 +30,9 @@ Before using this make sure that you have a license key that is valid for this u
          winrm set winrm/config/service @{AllowUnencrypted="true"}
          winrm set winrm/config/service/auth @{Basic="true"}
          sc config WinRM start= auto
-    
+
     At this point the image should be set up such that it can be run with `vagrant up`, though `vagrant ssh` is not going to work yet. Depending on what you'll be using the image for the next steps are optional.
-    
+
 ## FreeSSH for `vagrant ssh`
 
  9. Install [FreeSSHd](http://www.freesshd.com/). Create keys. Run it as a system service.
@@ -41,7 +41,7 @@ Before using this make sure that you have a license key that is valid for this u
 
  11. Add user `vagrant` with *Public key (SSH only)* authorization and allow *Shell*.
 
- 12. Download the unsafe [public key](https://github.com/mitchellh/vagrant/blob/master/keys/vagrant.pub) and save it as `vagrant` (no file extension) in `C:\\Program Files\\freeSSHd`. Ensure that the file has no `.txt` extension, sometimes it's there but not shown in the UI.
+ 12. Install the appropriate public key, either a secure one or the unsafe vagrant [public key](https://github.com/mitchellh/vagrant/blob/master/keys/vagrant.pub). Save it as `vagrant` (no file extension) in `C:\\Program Files\\freeSSHd`. Ensure that the file has no `.txt` extension, sometimes it's there but not shown in the UI.
 
  13. Under `Allow program to communicate through Windows Firewall` allow freeSSHd through.
 
@@ -54,6 +54,7 @@ At this point the VM should be set up appropriately for it to work with vagrant 
          vagrant package --base "Windows 7 32-bit Professional x86 English" --output win7-32.box
 
 Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't ask for password but sometimes does; it's unclear why that is.
+
 
 ## Development environment
 
@@ -72,7 +73,7 @@ Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't 
  19. Go to the jenkins master (for instance `http://aa00:8080`), under configure nodes download the appropriate `slave.jar` to `C:\Users\vagrant\Documents\jenkins`.
 
  20. Mount the `platform` codebase as a transient network share using `Shared Folders` in the host's virtualbox UI.
- 
+
  21. Start the `Task Scheduler` program on the windows VM. Import `windows/JenkinsSlaveTask.xml` from the `platform` codebase which is now available as a network share. The task won't work until it's run under vagrant but that's fine, that's when we need it.
 
  22. Copy `windows/start-jenkins-slave.bat` (*not* `run-jenkins-slave.bat`) to `C:\Users\vagrant\Documents\jenkins`.
@@ -93,7 +94,7 @@ Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't 
          @echo off
          call "C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"
          cd "C:\Users\Vagrant\Documents\Workspace"
- 
+
  19. Once you've set up the environment you can create the final vagrant box using the same command you used for testing. Remember to delete the previous box file and unregister the box from vagrant using
 
          rm win7-32.box

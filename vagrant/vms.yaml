@@ -1,21 +1,18 @@
 vms:
   precise64:
     ssh_port: 2200
+    forwarded_ports:
+      - host: 8080
+        guest: 8080
+        id: jenkins
 
   precise32:
     ssh_port: 2201
 
-  ie10-win7:
-    ssh_port: 2210
-
   win7-32:
-    ssh_port: 2211
-
-  mountain-lion:
-    ssh_port: 2220
+    ssh_port: 2210
 
 common:
   synced_folders:
     - path: "../.."
       name: "/platform"
-

@@ -69,4 +69,4 @@ set -v
 # so look into that only if it does become a problem.
 TMPFILE=/tmp/remote-script-$RANDOM.sh
 scp -P$PORT $SCRIPT $USER_PREFIX$HOST:$TMPFILE
-ssh -p$PORT $USER_PREFIX$HOST "bash $TMPFILE $FLAGS"
+ssh -t -p$PORT $USER_PREFIX$HOST "bash $TMPFILE $FLAGS"
