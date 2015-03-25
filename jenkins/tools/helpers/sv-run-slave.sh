@@ -6,4 +6,4 @@ OWNER=vagrant
 
 cd /home/$OWNER/
 exec 2>&1
-exec chpst -u $OWNER $BASE/run-slave.sh
+exec chpst -u $OWNER $BASE/run-slave-jar.sh

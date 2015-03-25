@@ -77,6 +77,7 @@ virtualbox-guest-dkms
 virtualbox-guest-utils
 """
 
+sudo apt-get update
 # Install required packages.
 for PACKAGE in $PACKAGES; do
   sudo apt-get install -y $PACKAGE

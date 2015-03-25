@@ -13,6 +13,7 @@ runit
 """
 
 # Install required packages.
+sudo apt-get update
 for PACKAGE in $PACKAGES; do
   sudo apt-get install -y $PACKAGE
 done
