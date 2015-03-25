@@ -5,7 +5,8 @@
 set -e
 
 HOST=
-PORT=22
+SSH_FLAGS=
+SCP_FLAGS=
 SCRIPT=
 FLAGS=
 USER_PREFIX=
@@ -19,7 +20,8 @@ while getopts ":-:" OPTCHAR; do
           OPTIND=$(($OPTIND + 1))
           ;;
         port)
-          PORT="${!OPTIND}"
+          SSH_FLAGS="$SSH_FLAGS -p${!OPTIND}"
+          SCP_FLAGS="$SCP_FLAGS -P${!OPTIND}"
           OPTIND=$(($OPTIND + 1))
           ;;
         user)
@@ -33,6 +35,9 @@ while getopts ":-:" OPTCHAR; do
         flags)
           FLAGS="${!OPTIND}"
           OPTIND=$(($OPTIND + 1))
+          ;;
+        tty)
+          SSH_FLAGS="$SSH_FLAGS -t"
           ;;
         *)
           echo "Unknown option --$OPTARG"
@@ -62,11 +67,12 @@ if [ ! -f "$SCRIPT" ]; then
   exit 1
 fi
 
-set -v
-
 # This spills the script in /tmp/ which may become a problem at some point. But
 # fixing it would make this even more intricate which is the last thing we need
 # so look into that only if it does become a problem.
 TMPFILE=/tmp/remote-script-$RANDOM.sh
-scp -P$PORT $SCRIPT $USER_PREFIX$HOST:$TMPFILE
-ssh -t -p$PORT $USER_PREFIX$HOST "bash $TMPFILE $FLAGS"
+
+set -v
+
+scp $SCP_FLAGS $SCRIPT $USER_PREFIX$HOST:$TMPFILE
+ssh $SSH_FLAGS $USER_PREFIX$HOST "bash $TMPFILE $FLAGS"
