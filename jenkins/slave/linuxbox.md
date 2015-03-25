@@ -7,5 +7,5 @@
  * After installing, ensure there's an ssh server installed (maybe install openssh-server).
  * Maybe make a snapshot in case something goes wrong in the following steps?
  * Shut down the machine. Manually forward port 22 to some arbitrary port on the host so we can connect to it from elsewhere.
- * From a host that has access to the vagrant private key, run picasso/jenkins/tools/prime-slave.sh
+ * From a host that has access to the vagrant private key, run `picasso/jenkins/tools/prime-slave-base-image.sh`.
  
