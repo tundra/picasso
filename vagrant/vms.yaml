@@ -1,13 +1,12 @@
 vms:
   precise64:
     ssh_port: 2200
-    forwarded_ports:
-      - host: 8080
-        guest: 8080
-        id: jenkins
 
   precise32:
     ssh_port: 2201
+
+  ubuntu-14.04.2-server-i386:
+    ssh_port: 2202
 
   win7-32:
     ssh_port: 2210

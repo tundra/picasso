@@ -3,7 +3,7 @@
 
 require '../../common/common.rb'
 
-Common.configure('precise64') do |config|
+Common.configure('precise64') do |config, externs|
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
   config.vm.provision :shell, :inline => "/platform/linux/bootstrap.sh"
 end

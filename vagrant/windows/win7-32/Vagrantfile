@@ -2,9 +2,8 @@
 # vi: set ft=ruby :
 
 require '../../common/common.rb'
-externs = Common::Externs.new 'win7-32'
 
-Common.configure('win7-32') do |config|
+Common.configure('win7-32') do |config, externs|
   config.vm.guest = :windows
   config.vm.box_url = (externs.local_box_path "win7-32.box")
 
@@ -14,5 +13,4 @@ Common.configure('win7-32') do |config|
 
   config.vm.network :forwarded_port, guest: 3389, host: 3389
   config.vm.network :forwarded_port, guest: 5985, host: 5985
-  externs.add_common_configs config
 end

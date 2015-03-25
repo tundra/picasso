@@ -101,7 +101,7 @@ module Common
     externs = Externs.new id
     Vagrant.configure("2") do |config|
       config.vm.box = id
-      thunk.call(config)
+      thunk.call(config, externs)
       externs.add_common_configs config
     end
   end
