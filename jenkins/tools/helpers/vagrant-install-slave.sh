@@ -10,6 +10,7 @@ PACKAGES="""
 git
 default-jre
 runit
+python-pip
 """
 
 # Install required packages.
@@ -21,6 +22,13 @@ done
 # Fetch the slave jar if it's not here already.
 if [ ! -f slave.jar ]; then
   wget http://ci.t.undra.org/jnlpJars/slave.jar
+fi
+
+# Create then jenkins homedir.
+JENKINS_HOME=/var/lib/jenkins
+if [ ! -d $JENKINS_HOME ]; then
+  sudo mkdir -p $JENKINS_HOME
+  sudo chown vagrant $JENKINS_HOME
 fi
 
 # Fetch picasso
