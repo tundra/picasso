@@ -2,8 +2,9 @@
 
 # Set up a machine to be a jenkins slave.
 
-set -e
+set -x -e
 
+BASE=$(dirname $0)
 REMOTE_FLAGS=
 
 while getopts ":-:" OPTCHAR; do
@@ -11,7 +12,7 @@ while getopts ":-:" OPTCHAR; do
     -)
       case "$OPTARG" in
         host)
-          REMOTE_FLAGS="$REMOTE_FLAGS --host $HOST"
+          REMOTE_FLAGS="$REMOTE_FLAGS --host ${!OPTIND}"
           OPTIND=$(($OPTIND + 1))
           ;;
         port)
@@ -35,4 +36,4 @@ done
 $BASE/run-script-remote.sh                                                     \
   $REMOTE_FLAGS                                                                \
   --user vagrant                                                               \
-  --script $BASE/helpers/vagrant-prime-base-slave-image.sh
+  --script $BASE/helpers/vagrant-install-slave.sh

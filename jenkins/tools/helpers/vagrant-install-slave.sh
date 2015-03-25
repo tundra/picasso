@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -x -e
 
 cd /home/vagrant
 

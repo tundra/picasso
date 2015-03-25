@@ -97,5 +97,5 @@ ssh-copy-id -i $VAGRANT_PUB $SSH_FLAGS vagrant@$HOST
 $BASE/run-script-remote.sh                                                     \
   $REMOTE_FLAGS                                                                \
   --user vagrant                                                               \
-  --script $BASE/helpers/vagrant-prime-base-slave-image.sh                     \
+  --script $BASE/helpers/vagrant-prime-slave-base-image.sh                     \
   --flags "--id $SLAVE_ID --secret $SECRET"
