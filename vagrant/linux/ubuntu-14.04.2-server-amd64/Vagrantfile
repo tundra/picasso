@@ -1,0 +1,8 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require '../../common/common.rb'
+
+Common.configure("ubuntu-14.04.2-server-amd64") do |config, externs|
+  config.vm.box_url = (externs.local_box_path "ubuntu-14.04.2-server-amd64.box")
+end

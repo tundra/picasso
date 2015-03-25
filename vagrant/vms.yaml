@@ -1,12 +1,15 @@
 vms:
-  precise64:
+  ubuntu-14.04.2-server-i386:
     ssh_port: 2200
 
-  precise32:
+  ubuntu-14.04.2-server-amd64:
     ssh_port: 2201
 
-  ubuntu-14.04.2-server-i386:
-    ssh_port: 2202
+  precise64:
+    ssh_port: 2300
+
+  precise32:
+    ssh_port: 2301
 
   win7-32:
     ssh_port: 2210
