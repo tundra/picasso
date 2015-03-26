@@ -4,7 +4,7 @@
 # say clean I mean: you better have ssh keys set up or you'll find yourself
 # entering passwords a *lot*.
 
-set -e
+set -x -e
 
 BASE=$(dirname $0)
 REMOTE_FLAGS=
@@ -69,7 +69,7 @@ if [ ! -f "$JENKINS_PRI" ]; then
 fi
 
 # Prime the master, creating user jenkins etc.
-$BASE/run-script-remote.sh $REMOTE_FLAGS --user root --script $BASE/helpers/root-prime-master.sh
+$BASE/run-script-remote.sh $REMOTE_FLAGS --user root --script $BASE/helpers/root-install-master.sh
 
 # Add the public key to the jenkins user. Ideally this would be done by
 # ssh-copy-id but we need root to do it, not jenkins itself.

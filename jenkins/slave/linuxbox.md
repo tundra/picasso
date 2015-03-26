@@ -13,4 +13,4 @@
  * Try running the new slave. It should start up without errors.
  * Try running `picasso/jenkins/tools/install-slave.sh` against your new vagrant-run slave. The slave should start up and attach to the jenkins server without errors.
 
-If all this works, deliver the box wherever it's needed. Remember, the box file contains some slightly secret information, the jenkins slave id, and has no protection of any kind. So don't leave it just lying around in a publicly visible place. If it's a massive hassle to keep the base boxes secret don't not keep them secret. The boxes are almost free of secrets and can be made completely free of them so if it's necessary let's take the time to do that instead.
+If all this works, deliver the box wherever it's needed. Remember, the box file should not contain any secrets of any kind because if they don't that makes them easier to handle, less to worry about, and before using an instance there'll be an install step for that particular concrete instance where secrets can be installed.
