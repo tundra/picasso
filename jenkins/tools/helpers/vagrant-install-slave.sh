@@ -1,65 +1,42 @@
 #!/bin/bash
 
-set -x -e
-
 SECRET=
 SLAVE_ID=
 
-while getopts ":-:" OPTCHAR; do
-  case "$OPTCHAR" in
-    -)
-      case "$OPTARG" in
-        id)
-          SLAVE_ID="${!OPTIND}"
-          OPTIND=$(($OPTIND + 1))
-          ;;
-        secret)
-          SECRET="${!OPTIND}"
-          OPTIND=$(($OPTIND + 1))
-          ;;
-        *)
-          echo "Unknown option --$OPTARG"
-          exit 1
-          ;;
-      esac
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --id)
+      SLAVE_ID="$2"
+      shift 2
+      ;;
+    --secret)
+      SECRET="$2"
+      shift 2
       ;;
     *)
-      echo "Unknown option -$OPTARG"
-      exit 1
+      die "Unknown option $1"
       ;;
   esac
 done
 
-if [ -z "$SLAVE_ID" ]; then
-  echo "No --id specified"
-  exit 1
-fi
-
-if [ -z "$SECRET" ]; then
-  echo "No --secret specified"
-  exit 1
-fi
+check_set --id "$SLAVE_ID"
+check_set --secret "$SECRET"
 
 cd /home/vagrant
 
 # Store the jenkins configuration for later use.
-echo -jnlpUrl http://ci.t.undra.org/computer/$SLAVE_ID/slave-agent.jnlp -secret $SECRET > jenkins-flags.txt
-chmod 600 jenkins-flags.txt
+FLAGS_FILE=jenkins-flags.txt
+echo -jnlpUrl http://ci.t.undra.org/computer/$SLAVE_ID/slave-agent.jnlp -secret $SECRET > $FLAGS_FILE
+chmod 600 $FLAGS_FILE
 
 # These are just the packages we need to make the base box. We'll install the
 # rest later.
-PACKAGES="""
+apt_install --sudo """
 git
 default-jre
 runit
 python-pip
 """
-
-# Install required packages.
-sudo apt-get update
-for PACKAGE in $PACKAGES; do
-  sudo apt-get install -y $PACKAGE
-done
 
 # Fetch the slave jar if it's not here already.
 if [ ! -f slave.jar ]; then

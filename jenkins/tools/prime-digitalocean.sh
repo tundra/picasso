@@ -2,31 +2,27 @@
 
 # Sets up a digitalocean instance. Run this before doing anything else.
 
-set -x -e
+. $(dirname $0)/helpers/common.sh
 
-BASE=$(dirname $0)
 REMOTE_FLAGS=
 
-while getopts ":-:" OPTCHAR; do
-  case "$OPTCHAR" in
-    -)
-      case "$OPTARG" in
-        host)
-          REMOTE_FLAGS="$REMOTE_FLAGS --host ${!OPTIND}"
-          OPTIND=$(($OPTIND + 1))
-          ;;
-        *)
-          echo "Unknown option --$OPTARG"
-          exit 1
-          ;;
-      esac
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --host)
+      REMOTE_FLAGS="$REMOTE_FLAGS --host $2"
+      shift 2
       ;;
     *)
-      echo "Unknown option -$OPTARG"
-      exit 1
+      die "Unknown option $1"
       ;;
   esac
 done
 
 # Run the priming script.
-$BASE/run-script-remote.sh $REMOTE_FLAGS --user root --port 22 --script $BASE/helpers/root-prime-digitalocean.sh
+$BASE/run-script-remote.sh                                                     \
+  $REMOTE_FLAGS                                                                \
+  --user root                                                                  \
+  --port 22                                                                    \
+  --script $BASE/helpers/common.sh                                             \
+  --script $BASE/helpers/root-prime-digitalocean.sh
