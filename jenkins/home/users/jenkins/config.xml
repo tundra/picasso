@@ -14,7 +14,7 @@
       <timestamp>1426516038111</timestamp>
     </jenkins.security.LastGrantedAuthoritiesProperty>
     <jenkins.security.ApiTokenProperty>
-      <apiToken>gNNw1m5PLYnXguQRGGw0pAC089AhlRa54+pB5kCwBeqR4zkM51cCG3zy6Vc1ggrQAZdaN+Q/959aqGeSik2PDh8TqFfBnmr2e4KuPrts6h8=</apiToken>
+      <apiToken>G2PiLoHDsvTWtDaj4M5ANWgsTRFd13mKkImnzMDADCdkATnQGslNCFiHv7sR1skBR6PDwnz3zq/b7ai0vVZqJJ/OU3uPbPBGNnE8f7JRWy8eqxnowwQ+QKmI57f28VXiMheh77tKcXtd9BCEabhKfk+M7H3WGwrcvBevr1a5RT8=</apiToken>
     </jenkins.security.ApiTokenProperty>
     <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.22">
       <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">

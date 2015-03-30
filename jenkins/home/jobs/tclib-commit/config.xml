@@ -4,7 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11.1">
       <projectUrl>http://github.com/tundra/tclib/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
@@ -29,7 +29,7 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
-    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.11">
+    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.11.1">
       <spec></spec>
     </com.cloudbees.jenkins.GitHubPushTrigger>
     <hudson.triggers.SCMTrigger>
@@ -63,7 +63,7 @@
         </allowedNodes>
       </condition>
       <buildStep class="hudson.tasks.Shell">
-        <command>./tools/ci.py begin --config tclib.mkmk</command>
+        <command>./tools/ci.py begin --config tclib.mkmk --always-clean</command>
       </buildStep>
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
@@ -74,7 +74,7 @@
         </allowedNodes>
       </condition>
       <buildStep class="hudson.tasks.BatchFile">
-        <command>tools\ci.py begin --config tclib.mkmk</command>
+        <command>tools\ci.py begin --config tclib.mkmk --always-clean</command>
       </buildStep>
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
