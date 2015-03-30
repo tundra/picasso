@@ -14,10 +14,10 @@ if ! user_exists picasso; then
   gpasswd -a picasso sudo
 
   # Set up ssh keys.
-  su picasso -c "mkdir -p ~/.ssh && chmod 700 ~/.ssh"
-  su picasso -c "touch ~/.ssh/authorized_keys"
+  as_user picasso "mkdir -p ~picasso/.ssh && chmod 700 ~picasso/.ssh"
+  as_user picasso touch ~picasso/.ssh/authorized_keys
   cat ~/.ssh/authorized_keys > ~picasso/.ssh/authorized_keys
-  su picasso -c "chmod 644 ~/.ssh/authorized_keys"
+  as_user picasso chmod 644 ~picasso/.ssh/authorized_keys
 fi
 
 # Change ssh configuration

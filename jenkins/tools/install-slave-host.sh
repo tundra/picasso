@@ -15,7 +15,7 @@ while [ $# -gt 0 ]; do
   case "$1" in
     --host)
       HOST="$2"
-      REMOTE_FLAGS="$REMOTE_FLAGS --host $HOST"
+      REMOTE_FLAGS="$REMOTE_FLAGS --host $2"
       shift 2
       ;;
     --port)

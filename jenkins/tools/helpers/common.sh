@@ -52,16 +52,37 @@ function user_exists {
 
 # Usage: replace_line (file) (from) (to). Replaces the given from-line with the
 # to-line in the given file. If the to-line is already present does nothing. If
-# not, the from-line must be present or the call will fail.
+# not, the from-line must be present or the call will fail. Pass --sudo as the
+# first argument to do this under sudo.
 function replace_line {
+  SUDO_OPT=""
+  while true;
+    do case "$1" in
+      --sudo) SUDO_OPT="sudo"; shift 1;;
+      *) break
+    esac
+  done
   FILE="$1"
   FROM="$2"
   TO="$3"
-  if ! grep "$TO" $FILE > /dev/null; then
-    grep "$FROM" $FILE
+  if ! $SUDO_OPT sh -c "grep \"$TO\" $FILE > /dev/null"; then
+    $SUDO_OPT grep "$FROM" $FILE
     echo "From line found; doing replacement"
-    sed -i "s/$FROM/$TO/g" $FILE
+    $SUDO_OPT sed -i "s|$FROM|$TO|g" $FILE
   fi
+}
+
+# Executes the given string as root. This is useful for cases where sudoing
+# directly doesn't work, for instance when there are pipes and redirections.
+function as_root {
+  sudo sh -c "$*"
+}
+
+# Usage: asuser (user) (command ...) Runs the command as the given user.
+function as_user {
+  TARGET=$1
+  shift 1
+  sudo su $TARGET -c "$*"
 }
 
 # Print an error message and kill the script.
