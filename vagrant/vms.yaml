@@ -1,20 +1,33 @@
 vms:
   ubuntu-14.04.2-server-i386:
+    os: linux
     ssh_port: 2200
 
   ubuntu-14.04.2-server-amd64:
+    os: linux
     ssh_port: 2201
 
+  windows7-professional-x86:
+    os: windows
+    ssh_port: 2202
+
+  windows7-professional-x64:
+    os: windows
+    ssh_port: 2203
+
   precise64:
+    os: linux
     ssh_port: 2300
 
   precise32:
+    os: linux
     ssh_port: 2301
 
   win7-32:
+    os: windows
     ssh_port: 2210
 
 common:
   synced_folders:
-    - path: "../.."
-      name: "/platform"
+    - path: "../../.."
+      name: "/picasso"

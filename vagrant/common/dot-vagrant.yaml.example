@@ -1,3 +1,9 @@
+vms:
+  windows7-professional-x86:
+    gui: 1
+
 common:
   boxes_path: "~/Boxes"
-  private_key_path: "~/keys/vagrant/id_rsa"
+
+linux:
+  private_key_path: "~/keys/vagrant_id_rsa"
