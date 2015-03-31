@@ -68,10 +68,14 @@ Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't 
 
 ## Jenkins slave
 
- 1. Ensure that `C:\Users\vagrant\Jenkins` exists.
+ 1. Ensure that `C:\Users\vagrant\Jenkins` and `C:\Jenkins` exist.
+
  2. Create a runner on a machine with access to the jenkins secrets by calling `./jenkins/tools/gen-windows-runner.sh`. Paste the output into `C:\Users\vagrant\Jenkins\run-jenkins-slave.bat`.
+
  3. Copy `picasso/vagrant/windows/start-jenkins-slave.bat` into `C:\Users\vagrant\Jenkins`.
+
  4. Download [slave.jar](http://ci.t.undra.org/jnlpJars/slave.jar) to `C:\Users\vagrant\Jenkins`.
+
  5. Start the *Task Scheduler* tool and import `picasso/vagrant/windows/JenkinsSlaveTask.xml`. Fix the user (it will most likely be using the wrong domain).
 
 ## Workspace
