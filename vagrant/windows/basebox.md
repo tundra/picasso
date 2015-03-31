@@ -66,6 +66,8 @@ Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't 
 
  19. Install [python 2.7](https://www.python.org/downloads/) for all users. Add the python bindir (typically `C:\Python27`) and the scriptdir (typically `C:\Python27\Scripts`) to the system `Path` environment variable.
 
+ 20. Using `pip`, install `virtualenv`.
+
 ## Jenkins slave
 
  1. Ensure that `C:\Users\vagrant\Jenkins` and `C:\Jenkins` exist.
