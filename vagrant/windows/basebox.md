@@ -8,7 +8,7 @@ Before using this make sure that you have a license key that is valid for this u
 
  2. Create a new virtual box vm with a fully descriptive name, say "Windows 7 Professional SP1 x86" (or whatever appropriately describes the vm -- this is the name I'll use below). Make the clipboard bidirectional.
 
- 3. Start it and boot from the downloaded iso. Install windows fresh. Create user ``picasso`` with a strong password.
+ 3. Start it and boot from the downloaded iso. Install windows fresh. Create user `vagrant` with password `vagrant`.
 
  4. Once the install is complete you typically want to take a snapshot of the machine state.
 
@@ -18,8 +18,6 @@ Before using this make sure that you have a license key that is valid for this u
 
  7. Enable the administrator account by running *Computer Management*, under *Local Users and Groups* selecting `Administrator`, unchecking `Account is disabled`, right-clicking and setting the password to `admin`.
  
- 8. Add user ``vagrant`` without admin rights. Right-click on the user and set the password to ``vagrant``.
-
  8. We're now going to configure WinRM. Open a command prompt. Become the administrator by doing
 
          runas /user:Administrator cmd
@@ -33,7 +31,7 @@ Before using this make sure that you have a license key that is valid for this u
          winrm set winrm/config/service/auth @{Basic="true"}
          sc config WinRM start= auto
 
-    At this point the image should be set up such that it can be run with `vagrant up`, though `vagrant ssh` is not going to work yet. Depending on what you'll be using the image for the next steps are optional.
+    At this point the image should be set up such that it can be run with `vagrant up`, though `vagrant rdp` is not going to work. Depending on what you'll be using the image for the next steps are optional.
 
 ## FreeSSH for `vagrant ssh`
 
@@ -53,7 +51,7 @@ Before using this make sure that you have a license key that is valid for this u
 
 At this point the VM should be set up appropriately for it to work with vagrant and particularly `vagrant ssh`. To test it you can try creating a vagrant box,
 
-         vagrant package --base "Windows 7 32-bit Professional x86 English" --output win7-32.box
+         vagrant package --base "Windows 7 Professional SP1 x86" --output win7-32.box
 
 Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't ask for password but sometimes does; it's unclear why that is.
 
@@ -68,18 +66,13 @@ Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't 
 
  19. Install [python 2.7](https://www.python.org/downloads/) for all users. Add the python bindir (typically `C:\Python27`) and the scriptdir (typically `C:\Python27\Scripts`) to the system `Path` environment variable.
 
- 20. Install [setuptools](https://pypi.python.org/pypi/setuptools).
-
 ## Jenkins slave
 
- 19. Go to the jenkins master (for instance `http://aa00:8080`), under configure nodes download the appropriate `slave.jar` to `C:\Users\vagrant\Documents\jenkins`.
-
- 20. Mount the `platform` codebase as a transient network share using `Shared Folders` in the host's virtualbox UI.
-
- 21. Start the `Task Scheduler` program on the windows VM. Import `windows/JenkinsSlaveTask.xml` from the `platform` codebase which is now available as a network share. The task won't work until it's run under vagrant but that's fine, that's when we need it.
-
- 22. Copy `windows/start-jenkins-slave.bat` (*not* `run-jenkins-slave.bat`) to `C:\Users\vagrant\Documents\jenkins`.
-
+ 1. Ensure that `C:\Users\vagrant\Jenkins` exists.
+ 2. Create a runner on a machine with access to the jenkins secrets by calling `./jenkins/tools/gen-windows-runner.sh`. Paste the output into `C:\Users\vagrant\Jenkins\run-jenkins-slave.bat`.
+ 3. Copy `picasso/vagrant/windows/start-jenkins-slave.bat` into `C:\Users\vagrant\Jenkins`.
+ 4. Download [slave.jar](http://ci.t.undra.org/jnlpJars/slave.jar) to `C:\Users\vagrant\Jenkins`.
+ 5. Start the *Task Scheduler* tool and import `picasso/vagrant/windows/JenkinsSlaveTask.xml`. Fix the user (it will most likely be using the wrong domain).
 
 ## Workspace
 
