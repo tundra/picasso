@@ -60,6 +60,8 @@ Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't 
 
  16. Install the free visual C++ express (typically 2010). A good place to look for it is [here](http://www.visualstudio.com/downloads/download-visual-studio-vs). You may have to install chrome to be able to download it from the website (wut?!?).
 
+ 17. On 64-bit install the 64-bit SDK, for windows 7 it comes with the [windows sdk](http://www.microsoft.com/en-us/download/details.aspx?id=8279). For 32-bit all the stuff you need comes with visual c++ out of the box.
+
  17. Install [git](http://git-scm.com/download/win). Use `Run Git from the Windows Command Prompt` and use the recommended line ending style.
 
  18. Install [java](https://www.java.com/en/download/). Remember to not install the bundled malware.
@@ -79,6 +81,9 @@ Remember to shut down the machine first. When you do `vagrant ssh` it shouldn't 
  4. Download [slave.jar](http://ci.t.undra.org/jnlpJars/slave.jar) to `C:\Users\vagrant\Jenkins`.
 
  5. Start the *Task Scheduler* tool and import `picasso/vagrant/windows/JenkinsSlaveTask.xml`. Fix the user (it will most likely be using the wrong domain).
+
+ 6. Apply the registry settings in `picasso/vagrant/windows/NoCrashDialog.reg`.
+ 
 
 ## Workspace
 
