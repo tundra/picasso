@@ -10,7 +10,9 @@ Before using this make sure that you have a license key that is valid for this u
 
  3. Start it and boot from the downloaded iso. Install windows fresh. Create user `vagrant` with password `vagrant`.
 
- 4. Once the install is complete you typically want to take a snapshot of the machine state.
+ 4. Check for software updates. There will be some. Once they're installed, check again there may be more. Rinse, repeat. This is likely to take a while.
+
+ 4. Once the update is complete you typically want to take a snapshot of the machine state.
 
  5. Install virtual box guest additions (remember to go to the mounted drive and run the installer).
 
@@ -30,6 +32,8 @@ Before using this make sure that you have a license key that is valid for this u
          winrm set winrm/config/service @{AllowUnencrypted="true"}
          winrm set winrm/config/service/auth @{Basic="true"}
          sc config WinRM start= auto
+
+ 9. You can now disable the administrator account again. You don't have to but you won't need it.
 
     At this point the image should be set up such that it can be run with `vagrant up`, though `vagrant rdp` is not going to work. Depending on what you'll be using the image for the next steps are optional.
 
