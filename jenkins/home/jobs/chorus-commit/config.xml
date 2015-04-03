@@ -5,29 +5,19 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11.1">
-      <projectUrl>http://github.com/tundra/tclib/</projectUrl>
+      <projectUrl>http://github.com/tundra/chorus/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
-    <hudson.model.ParametersDefinitionProperty>
-      <parameterDefinitions>
-        <hudson.model.StringParameterDefinition>
-          <name>sha1</name>
-          <description></description>
-          <defaultValue></defaultValue>
-        </hudson.model.StringParameterDefinition>
-      </parameterDefinitions>
-    </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.4">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <refspec>+refs/pull/*:refs/remotes/origin/pr/*</refspec>
-        <url>http://github.com/tundra/tclib/</url>
+        <url>http://github.com/tundra/chorus/</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>${sha1}</name>
+        <name>*/master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -45,30 +35,9 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
-    <org.jenkinsci.plugins.ghprb.GhprbTrigger plugin="ghprb@1.17">
-      <spec>H/5 * * * *</spec>
-      <adminlist></adminlist>
-      <allowMembersOfWhitelistedOrgsAsAdmin>true</allowMembersOfWhitelistedOrgsAsAdmin>
-      <orgslist>tundra</orgslist>
-      <cron>H/5 * * * *</cron>
-      <triggerPhrase></triggerPhrase>
-      <onlyTriggerPhrase>false</onlyTriggerPhrase>
-      <useGitHubHooks>true</useGitHubHooks>
-      <permitAll>false</permitAll>
-      <commentFilePath></commentFilePath>
-      <whitelist></whitelist>
-      <autoCloseFailedPullRequests>false</autoCloseFailedPullRequests>
-      <displayBuildErrorsOnDownstreamBuilds>false</displayBuildErrorsOnDownstreamBuilds>
-      <whiteListTargetBranches>
-        <org.jenkinsci.plugins.ghprb.GhprbBranch>
-          <branch></branch>
-        </org.jenkinsci.plugins.ghprb.GhprbBranch>
-      </whiteListTargetBranches>
-      <msgSuccess></msgSuccess>
-      <msgFailure></msgFailure>
-      <commitStatusContext></commitStatusContext>
-      <project>tclib-pulls</project>
-    </org.jenkinsci.plugins.ghprb.GhprbTrigger>
+    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.11.1">
+      <spec></spec>
+    </com.cloudbees.jenkins.GitHubPushTrigger>
     <hudson.triggers.SCMTrigger>
       <spec>H H * * *</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
@@ -100,8 +69,7 @@
         </allowedNodes>
       </condition>
       <buildStep class="hudson.tasks.Shell">
-        <command>./tools/ci.py begin --config tclib.mkmk --always-clean --sticky-init-flags=&quot;--gcc48&quot;
-</command>
+        <command>./tools/ci.py begin --config chorus.mkmk --always-clean --sticky-init-flags=&quot;--gcc48&quot;</command>
       </buildStep>
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
@@ -113,7 +81,7 @@
         </allowedNodes>
       </condition>
       <buildStep class="hudson.tasks.BatchFile">
-        <command>tools\ci.py begin --config tclib.mkmk --always-clean</command>
+        <command>tools\ci.py begin --config chorus.mkmk --always-clean</command>
       </buildStep>
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>

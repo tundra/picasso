@@ -5,7 +5,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11.1">
-      <projectUrl>http://github.com/tundra/tclib/</projectUrl>
+      <projectUrl>http://github.com/tundra/chorus/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
@@ -22,7 +22,7 @@
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <refspec>+refs/pull/*:refs/remotes/origin/pr/*</refspec>
-        <url>http://github.com/tundra/tclib/</url>
+        <url>http://github.com/tundra/chorus/</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -67,7 +67,7 @@
       <msgSuccess></msgSuccess>
       <msgFailure></msgFailure>
       <commitStatusContext></commitStatusContext>
-      <project>tclib-pulls</project>
+      <project>chorus-pulls</project>
     </org.jenkinsci.plugins.ghprb.GhprbTrigger>
     <hudson.triggers.SCMTrigger>
       <spec>H H * * *</spec>
@@ -100,7 +100,7 @@
         </allowedNodes>
       </condition>
       <buildStep class="hudson.tasks.Shell">
-        <command>./tools/ci.py begin --config tclib.mkmk --always-clean --sticky-init-flags=&quot;--gcc48&quot;
+        <command>./tools/ci.py begin --config chorus.mkmk --always-clean --sticky-init-flags=&quot;--gcc48&quot;
 </command>
       </buildStep>
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
@@ -113,7 +113,7 @@
         </allowedNodes>
       </condition>
       <buildStep class="hudson.tasks.BatchFile">
-        <command>tools\ci.py begin --config tclib.mkmk --always-clean</command>
+        <command>tools\ci.py begin --config chorus.mkmk --always-clean</command>
       </buildStep>
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>
