@@ -47,7 +47,7 @@ rm -f $OUT
 if [ "$VARS" == "32" ]; then
   VCVARS="\"C:\\Program Files\\Microsoft Visual Studio 10.0\\VC\\bin\\vcvars32.bat\""
 elif [ "$VARS" == "64" ]; then
-  VCVARS="\"C:\\Program Files (x64)\\Microsoft Visual Studio 10.0\\VC\\vcvarsall.bat\" amd64"
+  VCVARS="\"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.Cmd\" /x64"
 else
   die "Unknown --vars $VARS, should be either 32 or 64"
 fi
