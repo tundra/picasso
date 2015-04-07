@@ -46,11 +46,11 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <org.jenkinsci.plugins.ghprb.GhprbTrigger plugin="ghprb@1.17">
-      <spec>H/5 * * * *</spec>
+      <spec>H H H H H</spec>
       <adminlist></adminlist>
       <allowMembersOfWhitelistedOrgsAsAdmin>true</allowMembersOfWhitelistedOrgsAsAdmin>
       <orgslist>tundra</orgslist>
-      <cron>H/5 * * * *</cron>
+      <cron>H H H H H</cron>
       <triggerPhrase></triggerPhrase>
       <onlyTriggerPhrase>false</onlyTriggerPhrase>
       <useGitHubHooks>true</useGitHubHooks>
@@ -70,7 +70,7 @@
       <project>neutrino-pulls</project>
     </org.jenkinsci.plugins.ghprb.GhprbTrigger>
     <hudson.triggers.SCMTrigger>
-      <spec>H H * * *</spec>
+      <spec>H H H H H</spec>
       <ignorePostCommitHooks>false</ignorePostCommitHooks>
     </hudson.triggers.SCMTrigger>
   </triggers>
@@ -100,8 +100,7 @@
         </allowedNodes>
       </condition>
       <buildStep class="hudson.tasks.Shell">
-        <command>./tools/ci.py begin --config neutrino.mkmk --always-clean --sticky-init-flags=&quot;--gcc48&quot;
-</command>
+        <command>./tools/ci.py begin --config neutrino.mkmk --always-clean --sticky-init-flags=&quot;--gcc48&quot;</command>
       </buildStep>
       <runner class="org.jenkins_ci.plugins.run_condition.BuildStepRunner$Fail" plugin="run-condition@1.0"/>
     </org.jenkinsci.plugins.conditionalbuildstep.singlestep.SingleConditionalBuilder>

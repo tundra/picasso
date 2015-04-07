@@ -1,0 +1,45 @@
+9a10,18
+>     <hudson.model.ParametersDefinitionProperty>
+>       <parameterDefinitions>
+>         <hudson.model.StringParameterDefinition>
+>           <name>sha1</name>
+>           <description></description>
+>           <defaultValue></defaultValue>
+>         </hudson.model.StringParameterDefinition>
+>       </parameterDefinitions>
+>     </hudson.model.ParametersDefinitionProperty>
+14a24
+>         <refspec>+refs/pull/*:refs/remotes/origin/pr/*</refspec>
+20c30
+<         <name>*/master</name>
+---
+>         <name>${sha1}</name>
+38,40c48,71
+<     <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.11.1">
+<       <spec></spec>
+<     </com.cloudbees.jenkins.GitHubPushTrigger>
+---
+>     <org.jenkinsci.plugins.ghprb.GhprbTrigger plugin="ghprb@1.17">
+>       <spec>H H H H H</spec>
+>       <adminlist></adminlist>
+>       <allowMembersOfWhitelistedOrgsAsAdmin>true</allowMembersOfWhitelistedOrgsAsAdmin>
+>       <orgslist>tundra</orgslist>
+>       <cron>H H H H H</cron>
+>       <triggerPhrase></triggerPhrase>
+>       <onlyTriggerPhrase>false</onlyTriggerPhrase>
+>       <useGitHubHooks>true</useGitHubHooks>
+>       <permitAll>false</permitAll>
+>       <commentFilePath></commentFilePath>
+>       <whitelist></whitelist>
+>       <autoCloseFailedPullRequests>false</autoCloseFailedPullRequests>
+>       <displayBuildErrorsOnDownstreamBuilds>false</displayBuildErrorsOnDownstreamBuilds>
+>       <whiteListTargetBranches>
+>         <org.jenkinsci.plugins.ghprb.GhprbBranch>
+>           <branch></branch>
+>         </org.jenkinsci.plugins.ghprb.GhprbBranch>
+>       </whiteListTargetBranches>
+>       <msgSuccess></msgSuccess>
+>       <msgFailure></msgFailure>
+>       <commitStatusContext></commitStatusContext>
+>       <project>tclib-pulls</project>
+>     </org.jenkinsci.plugins.ghprb.GhprbTrigger>
