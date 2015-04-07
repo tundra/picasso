@@ -82,6 +82,7 @@
         <string>linux32</string>
         <string>linux64</string>
         <string>win7-32</string>
+        <string>win7-64</string>
       </values>
     </hudson.matrix.LabelAxis>
   </axes>
