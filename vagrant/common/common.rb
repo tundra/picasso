@@ -1,7 +1,7 @@
 require 'yaml'
 
 # Load the local overrides if there are any.
-LOCAL_CONFIG_FILE = "#{ENV['HOME']}/.tundra/.vagrant.yaml"
+LOCAL_CONFIG_FILE = "#{ENV['HOME']}/.tundra/vagrant.yaml"
 if File.exist?(LOCAL_CONFIG_FILE)
   LOCAL_DICT = YAML::load(File.open(LOCAL_CONFIG_FILE))
 else
