@@ -1,6 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require '../../common/common.rb'
+require_relative '../../common/common.rb'
 
 Common.configure("ubuntu-14.04.2-server-i386")
