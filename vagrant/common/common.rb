@@ -8,8 +8,11 @@ else
   LOCAL_DICT = {}
 end
 
+# The root vagrant directory.
+ROOT = File.dirname(File.dirname(__FILE__))
+
 # Load the common configuration file.
-VMS_DICT = YAML::load(File.open("../../vms.yaml"))
+VMS_DICT = YAML::load(File.open(File.join(ROOT, "vms.yaml")))
 
 module Common
 
@@ -161,6 +164,14 @@ module Common
   def self.configure_windows(id, &thunk)
     self.configure(id) do |config, externs|
       config.vm.communicator = :winrm
+
+      # Explicitly forward the rdp port because for some reason that
+      # doesn't happen automatically.
+      config.vm.network :forwarded_port,
+        host: 33389,
+        guest: 3389,
+        id: "rdp",
+        auto_correct: true
 
       thunk.call(config, externs) unless thunk.nil?
     end
