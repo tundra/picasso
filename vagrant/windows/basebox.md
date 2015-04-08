@@ -35,7 +35,9 @@ Before using this make sure that you have a license key that is valid for this u
 
  9. You can now disable the administrator account again. You don't have to but you won't need it.
 
-    At this point the image should be set up such that it can be run with `vagrant up`, though `vagrant rdp` is not going to work. Depending on what you'll be using the image for the next steps are optional.
+ 10. Under *Remote Desktop* in *Allow remote access to this computer* set *Allow connections from computers running any version of Remote Desktop*.
+
+    At this point the image should be set up such that it can be run with `vagrant up` and `vagrant rdp`. Depending on what you'll be using the image for the next steps are optional.
 
 ## FreeSSH for `vagrant ssh`
 
