@@ -75,10 +75,6 @@ module Common
       self.vm_field "os"
     end
 
-    def gui
-      self.nearest_field("gui", false)
-    end
-
     # Returns the path where vagrant should look for local boxes.
     def local_box_path name
       boxes_root = (self.nearest_field "boxes_path") || ENV['VAGRANT_BOXES'] || "~/.boxes"
@@ -137,7 +133,12 @@ module Common
         guest: 22,
         id: "ssh"
       config.vm.provider :virtualbox do |vb|
-        vb.gui = self.gui
+        gui = self.nearest_field "gui"
+        (vb.gui = gui) if gui
+        memory = self.nearest_field "memory"
+        (vb.memory = memory) if memory
+        cpus = self.nearest_field "cpus"
+        (vb.cpus = cpus) if cpus
       end
     end
 
