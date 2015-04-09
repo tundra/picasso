@@ -26,7 +26,7 @@
 # then.
 
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-DESC="Description of the service"
+DESC="Picasso slave vms"
 NAME=picasso
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
@@ -41,10 +41,6 @@ SCRIPTNAME=/etc/init.d/$NAME
 # Depend on lsb-base (>= 3.2-14) to ensure that this file is present
 # and status_of_proc is working.
 . /lib/lsb/init-functions
-
-if [ -s "$DEFAULTS_FILE" ]; then
-  . "$DEFAULTS_FILE"
-fi
 
 if [ -z "$PICASSO_HOME" ]; then
   log_failure_msg "No \$PICASSO_HOME set"
