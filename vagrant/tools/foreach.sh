@@ -4,7 +4,7 @@
 
 set -e
 
-VAGRANT="$(dirname $0)"
+VAGRANT="$(dirname $(dirname $0))"
 
 VMS="""
 linux/ubuntu-14.04.2-server-i386
