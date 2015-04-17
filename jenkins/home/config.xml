@@ -123,7 +123,7 @@
       <recurse>false</recurse>
     </listView>
   </views>
-  <primaryView>Commits</primaryView>
+  <primaryView>All</primaryView>
   <slaveAgentPort>45678</slaveAgentPort>
   <label>master</label>
   <nodeProperties/>

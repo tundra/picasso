@@ -1,4 +1,8 @@
-9a10,18
+7c7
+<     <numToKeep>5</numToKeep>
+---
+>     <numToKeep>3</numToKeep>
+15a16,24
 >     <hudson.model.ParametersDefinitionProperty>
 >       <parameterDefinitions>
 >         <hudson.model.StringParameterDefinition>
@@ -8,13 +12,13 @@
 >         </hudson.model.StringParameterDefinition>
 >       </parameterDefinitions>
 >     </hudson.model.ParametersDefinitionProperty>
-14a24
+20a30
 >         <refspec>+refs/pull/*:refs/remotes/origin/pr/*</refspec>
-20c30
+26c36
 <         <name>*/master</name>
 ---
 >         <name>${sha1}</name>
-38,40c48,71
+44,46c54,77
 <     <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.11.1">
 <       <spec></spec>
 <     </com.cloudbees.jenkins.GitHubPushTrigger>
