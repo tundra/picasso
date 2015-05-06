@@ -20,3 +20,5 @@ If all this works, deliver the box wherever it's needed. Remember, the box file 
 ## Resizing a linux disk
 
 The disks are typically stored as VMDK and can't be resized. Instead, clone the disk into a VDI image using the virtual media manager, resize it using for instance `VBoxManage modifyhd <path> --resize 8192`, remove the previous disk image from the VM, remove it from the virtual media manger's list, then attach the cloned and resized disk.
+
+After resizing the disk you need to repartition it so the vm gets access to the new space. This is kind of a pain. One approach that has worked has been to mount an install disk in the CD drive, boot the machine and enter the rescue flow, aborting the process and jumping to the partition step.
