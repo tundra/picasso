@@ -1,3 +1,5 @@
+## Creating a linux base box
+
  * Create a new virtualbox vm. Make sure it's at least as powerful as the OS's minimal requirements, typically you can go below virtualbox's suggestions. The name should be something like the full os name (ie. "Ubuntu 14.04.2 Server i386").
  * Power up. Mount the OS install image.
  * Install the OS. Wherever possible use the vanilla configuration.
@@ -14,3 +16,7 @@
  * Try running `picasso/jenkins/tools/install-slave.sh` against your new vagrant-run slave. The slave should start up and attach to the jenkins server without errors.
 
 If all this works, deliver the box wherever it's needed. Remember, the box file should not contain any secrets of any kind because if they don't that makes them easier to handle, less to worry about, and before using an instance there'll be an install step for that particular concrete instance where secrets can be installed.
+
+## Resizing a linux disk
+
+The disks are typically stored as VMDK and can't be resized. Instead, clone the disk into a VDI image using the virtual media manager, resize it using for instance `VBoxManage modifyhd <path> --resize 8192`, remove the previous disk image from the VM, remove it from the virtual media manger's list, then attach the cloned and resized disk.
