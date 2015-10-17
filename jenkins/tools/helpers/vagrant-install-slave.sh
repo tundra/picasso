@@ -29,13 +29,17 @@ FLAGS_FILE=jenkins-flags.txt
 echo -jnlpUrl http://ci.t.undra.org/computer/$SLAVE_ID/slave-agent.jnlp -secret $SECRET > $FLAGS_FILE
 chmod 600 $FLAGS_FILE
 
-# These are just the packages we need to make the base box. We'll install the
-# rest later.
+# These are the packages we need to build everything, they come in addition to
+# what we installed to make this a base box.
 apt_install --sudo """
 git
 default-jre
 runit
 python-pip
+pkg-config
+freeglut3-dev
+libfreetype6-dev
+libfontconfig-dev
 """
 
 # Fetch the slave jar if it's not here already.
