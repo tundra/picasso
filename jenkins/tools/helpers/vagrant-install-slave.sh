@@ -32,14 +32,15 @@ chmod 600 $FLAGS_FILE
 # These are the packages we need to build everything, they come in addition to
 # what we installed to make this a base box.
 apt_install --sudo """
-git
 default-jre
-runit
-python-pip
-pkg-config
 freeglut3-dev
-libfreetype6-dev
+git
 libfontconfig-dev
+libfreetype6-dev
+pkg-config
+python-pip
+python2.7-dev
+runit
 """
 
 # Fetch the slave jar if it's not here already.

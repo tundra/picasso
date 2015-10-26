@@ -32,14 +32,16 @@ function check_user {
 # Install a list of packages. Pass --sudo to sudo-install them.
 function apt_install {
   # Read flags.
+  UPDATE="apt-get update"
   COMMAND="apt-get install -y"
   while true;
     do case "$1" in
-      --sudo) COMMAND="sudo $COMMAND"; shift 1;;
+      --sudo) UPDATE="sudo $UPDATE"; COMMAND="sudo $COMMAND"; shift 1;;
       *) break
     esac
   done
   # Do the installation.
+  $UPDATE
   for PACKAGE in $1; do
     $COMMAND $PACKAGE
   done

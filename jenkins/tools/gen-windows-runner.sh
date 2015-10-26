@@ -9,7 +9,8 @@ JENKINS_PRI=
 SLAVE_ID=
 USER=vagrant
 OUT=run-jenkins-slave.bat
-VARS=
+MSVS_YEAR=
+MSVS_ARCH_WIDTH=
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -21,8 +22,12 @@ while [ $# -gt 0 ]; do
       SLAVE_ID="$2"
       shift 2
       ;;
-    --vars)
-      VARS="$2"
+    --msvs-year)
+      MSVS_YEAR="$2"
+      shift 2
+      ;;
+    --msvs-arch-width)
+      MSVS_ARCH_WIDTH="$2"
       shift 2
       ;;
     *)
@@ -35,21 +40,40 @@ SECRET_CRYPT="$BASE/../slave/$SLAVE_ID.secret.crypt"
 
 check_set --id "$SLAVE_ID"
 check_set --jenkins-private-key "$JENKINS_PRI"
-check_set --vars "$VARS"
+check_set --msvs-year "$MSVS_YEAR"
+check_set --msvs-arch-width "$MSVS_ARCH_WIDTH"
 check_file_exists "$JENKINS_PRI"
 check_file_exists "$SECRET_CRYPT"
 
 # If a jenkins key is given we extract the secret from the slave files.
 SECRET=$(cat $SECRET_CRYPT | base64 -d | openssl rsautl -decrypt -inkey $JENKINS_PRI)
 
+# year/vs-version/api-version
+MSVS_INFO="""
+2010/10.0/7.0
+2012/11.0/7.1
+2013/12.0/8.1
+2015/14.0/8.1
+"""
+
 rm -f $OUT
 
-if [ "$VARS" == "32" ]; then
-  VCVARS="\"C:\\Program Files\\Microsoft Visual Studio 10.0\\VC\\bin\\vcvars32.bat\""
-elif [ "$VARS" == "64" ]; then
-  VCVARS="\"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.Cmd\" /x64"
+MSVS_VERSION=
+for INFO in $MSVS_INFO; do
+  YEAR=$(echo "$INFO" | cut -f1 -d/)
+  if [ "$YEAR" == "$MSVS_YEAR" ]; then
+    MSVS_VERSION=$(echo "$INFO" | cut -f2 -d/)
+  fi
+done
+
+if [ -z "$MSVS_VERSION" ]; then
+  die "Unknown MSVS year $MSVS_YEAR"
+fi
+
+if [ "$MSVS_ARCH_WIDTH" == "32" ]; then
+  VCVARS="\"C:\\Program Files\\Microsoft Visual Studio $MSVS_VERSION\\VC\\bin\\vcvars32.bat\""
 else
-  die "Unknown --vars $VARS, should be either 32 or 64"
+  VCVARS="\"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.Cmd\" /x64"
 fi
 
 echo """
