@@ -63,6 +63,7 @@ for INFO in $MSVS_INFO; do
   YEAR=$(echo "$INFO" | cut -f1 -d/)
   if [ "$YEAR" == "$MSVS_YEAR" ]; then
     MSVS_VERSION=$(echo "$INFO" | cut -f2 -d/)
+    API_VERSION=$(echo "$INFO" | cut -f3 -d/)
   fi
 done
 
@@ -73,11 +74,12 @@ fi
 if [ "$MSVS_ARCH_WIDTH" == "32" ]; then
   VCVARS="\"C:\\Program Files\\Microsoft Visual Studio $MSVS_VERSION\\VC\\bin\\vcvars32.bat\""
 else
-  VCVARS="\"C:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Bin\\SetEnv.Cmd\" /x64"
+  VCVARS="\"C:\\Program Files (x86)\\Microsoft Visual Studio $MSVS_VERSION\\Common7\\Tools\\VsDevCmd.bat\""
 fi
 
 echo """
 call $VCVARS
+set LIBRARY_CONTAINER=C:\\Libraries
 cd C:\\Users\\vagrant\\Jenkins
 start /b cmd /c \"java -jar slave.jar -jnlpUrl http://ci.t.undra.org/computer/$SLAVE_ID/slave-agent.jnlp -secret $SECRET\"
 """
